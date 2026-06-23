@@ -1,0 +1,251 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* TakoHalo Custom Theme Tokens */
+  --text: #7A6F6F; /* Nền xám ấm hài hòa với tone hồng đất */
+  --text-h: #3A3535; /* Màu chữ tiêu đề đậm đà, không bị đen gắt */
+  --bg: #F6F4E8; /* Màu kem nền chuẩn từ bảng màu TakoHalo */
+  --border: oklch(0.93 0.01 85.0); /* Đường viền tiệp tone kem */
+  --code-bg: #E5EEE4; /* Màu xanh lá nhạt pastel làm nền code */
+  --accent: #C0E1D2; /* Màu xanh mint pastel làm điểm nhấn bổ trợ */
+  --accent-bg: rgba(220, 155, 155, 0.1); /* Hồng Tako trong suốt */
+  --accent-border: rgba(220, 155, 155, 0.4);
+  --social-bg: rgba(229, 238, 228, 0.5);
+  --shadow: rgba(58, 53, 53, 0.06) 0 10px 15px -3px, rgba(58, 53, 53, 0.03) 0 4px 6px -2px;
+
+  --sans: 'Geist Variable', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Geist Variable', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+
+  /* Shadcn & Tailwind CSS Tokens (Đã map theo hệ màu TakoHalo) */
+  --background: oklch(0.965 0.012 85.0); /* #F6F4E8 bản oklch */
+  --foreground: oklch(0.28 0.015 20.0); /* Chữ đậm màu hạt dẻ/xám ấm */
+
+  --card: oklch(0.98 0.005 85.0);
+  --card-foreground: oklch(0.28 0.015 20.0);
+
+  --popover: oklch(0.98 0.005 85.0);
+  --popover-foreground: oklch(0.28 0.015 20.0);
+
+  /* Primary: Màu hồng Tako chủ đạo (#DC9B9B) */
+  --primary: oklch(0.72 0.11 18.0); 
+  --primary-foreground: oklch(0.98 0.005 85.0);
+
+  /* Secondary: Màu xanh mint bổ trợ (#C0E1D2) */
+  --secondary: oklch(0.88 0.05 165.0);
+  --secondary-foreground: oklch(0.35 0.04 165.0);
+
+  --muted: oklch(0.93 0.02 90.0);
+  --muted-foreground: oklch(0.55 0.02 20.0);
+
+  --accent-foreground: oklch(0.72 0.11 18.0);
+
+  --destructive: oklch(0.60 0.18 25.0); /* Giữ tone đỏ ấm hợp với palette */
+
+  --input: oklch(0.90 0.02 90.0);
+  --ring: oklch(0.72 0.11 18.0); /* Focus ring hiển thị màu hồng thương hiệu */
+
+  /* Bảng màu Chart tối ưu theo phong cách Pastel */
+  --chart-1: oklch(0.72 0.11 18.0);  /* Hồng Tako */
+  --chart-2: oklch(0.88 0.05 165.0); /* Xanh Mint */
+  --chart-3: oklch(0.92 0.04 125.0); /* Xanh Lá Nhạt */
+  --chart-4: oklch(0.82 0.08 45.0);  /* Cam Nhạt Pastel */
+  --chart-5: oklch(0.78 0.06 340.0); /* Tím Hồng Pastel */
+
+  --radius: 0.75rem; /* Tăng bo tròn một chút để ứng dụng trông "vibe" dễ thương, bầu bĩnh hơn */
+
+  --sidebar: oklch(0.95 0.01 85.0);
+  --sidebar-foreground: oklch(0.35 0.01 20.0);
+  --sidebar-primary: oklch(0.72 0.11 18.0);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.88 0.05 165.0);
+  --sidebar-accent-foreground: oklch(0.25 0.04 165.0);
+  --sidebar-border: oklch(0.90 0.01 85.0);
+  --sidebar-ring: oklch(0.72 0.11 18.0);
+}
+
+/* Dark Mode tối ưu theo tone màu trầm ấm (Dark Sepia/Charcoal), không dùng màu đen kịt đen sì */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #A59B9B;
+    --text-h: #EAE5E5;
+    --bg: #231F1F; /* Nền tối ngả xám ấm */
+    --border: #3A3535;
+    --code-bg: #2B332A;
+    --accent: #DC9B9B;
+    --accent-bg: rgba(220, 155, 155, 0.15);
+    --accent-border: rgba(220, 155, 155, 0.5);
+    --social-bg: rgba(58, 53, 53, 0.5);
+    --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(0.9) sepia(0.2) saturate(0.5);
+  }
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 600; /* Tăng nhẹ độ dày font để giao diện trông nổi bật tinh tế hơn */
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: 'Geist Variable', sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+.dark {
+  --background: oklch(0.20 oklch-samples); /* Custom Dark Mode map theo hệ màu tối của tinh chỉnh phía trên */
+  --background: oklch(0.22 0.01 85.0);
+  --foreground: oklch(0.92 0.01 85.0);
+  --card: oklch(0.26 0.01 85.0);
+  --card-foreground: oklch(0.92 0.01 85.0);
+  --popover: oklch(0.26 0.01 85.0);
+  --popover-foreground: oklch(0.92 0.01 85.0);
+  --primary: oklch(0.72 0.11 18.0); /* Giữ nguyên màu hồng thương hiệu làm chủ đạo */
+  --primary-foreground: oklch(0.22 0.01 85.0);
+  --secondary: oklch(0.32 0.03 165.0);
+  --secondary-foreground: oklch(0.88 0.05 165.0);
+  --muted: oklch(0.28 0.01 85.0);
+  --muted-foreground: oklch(0.65 0.01 85.0);
+  --accent: oklch(0.32 0.03 165.0);
+  --accent-foreground: oklch(0.88 0.05 165.0);
+  --destructive: oklch(0.50 0.18 25.0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 18%);
+  --ring: oklch(0.72 0.11 18.0);
+  --sidebar: oklch(0.24 0.01 85.0);
+  --sidebar-foreground: oklch(0.85 0.01 85.0);
+  --sidebar-primary: oklch(0.72 0.11 18.0);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.32 0.03 165.0);
+  --sidebar-accent-foreground: oklch(0.88 0.05 165.0);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.72 0.11 18.0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
