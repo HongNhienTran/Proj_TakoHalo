@@ -61,5 +61,25 @@ export const useAuthStore = create<authState>((set, get)=> ({
         }finally{
             set({loading: false})
         }
+    },
+    refresh: async () => {
+        try {
+            set({loading: true});
+            const {user, fetchMe} = get();
+            const accessToken  = await authService.refresh();
+            const tokenString = accessToken.accessToken ? accessToken.accessToken : accessToken;
+            set({accessToken: tokenString});
+
+            if(!user){
+                await fetchMe();
+            }
+        } catch (error) {
+            console.error("Refresh token failed:", error);
+            toast.error("Refresh token failed. Please try again.");
+            get().clearState();
+        }finally{
+            set({loading: false})
+        }
+    
     }
 }))
