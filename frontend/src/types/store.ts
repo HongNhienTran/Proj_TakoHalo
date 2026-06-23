@@ -12,4 +12,6 @@ export interface authState {
   signIn: (username: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   fetchMe: () => Promise<void>;
+  refresh: () => Promise<void>;
+
 }
