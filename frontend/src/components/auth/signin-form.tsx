@@ -13,7 +13,7 @@ import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useAuthStore } from "@/stores/useAuthStore"
-import { useNavigate } from "react-router"
+import { Link, useNavigate } from "react-router"
 
 const signinSchema = z.object({
     username: z.string().min(3, { message: "Username must be at least 3 characters long" }),
@@ -101,7 +101,7 @@ export function SignInForm({
                                 </Button>
                             </Field>
                             <FieldDescription className="text-center">
-                                Already have an account? <a href="#">Sign up</a>
+                                Don't have an account? <Link to="/signup" className="underline hover:text-primary">Sign up</Link>
                             </FieldDescription>
                         </FieldGroup>
                     </form>
