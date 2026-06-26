@@ -47,5 +47,28 @@ export const sendDirectMesssage = async (req, res) => {
 }
 
 export const sendGroupMesssage = async (req, res) => {
+    try {
+        const { conversationId, content } = req.body;
+        const senderId = req.user._id;
 
+        const conversation = await Conversation.findById(conversationId);
+        if (!content) {
+            return res.status(400).json({ message: "Content is required" });
+        }
+
+        const message = await Message.create({
+            conversationId,
+            senderId,
+            content
+        });
+
+        updateConversationAfterCreateMessage(conversation, message, senderId);
+
+        await conversation.save();
+
+        return res.status(201).json({ message: "Message sent", data: message });
+    } catch (error) {
+        console.error("Error sending message:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
 }
